@@ -1,0 +1,68 @@
+!
+! =============================================
+! Intended Configuration for {{ device.name }}
+! Location: {{ device.location.name }}
+! Role: {{ device.role.name }}
+! Platform: {{ device.platform.name }}
+! =============================================
+!
+hostname {{ device.name }}
+!
+! --- AAA Configuration ---
+aaa new-model
+aaa authentication login default local
+aaa authorization exec default local
+!
+! --- Management ---
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+no ip domain-lookup
+ip domain-name techademy.lab
+!
+! --- NTP Configuration ---
+ntp server 10.100.0.1 prefer
+ntp server 10.100.0.2
+clock timezone UTC 0
+!
+! --- DNS Configuration ---
+ip name-server 10.100.0.10
+ip name-server 10.100.0.11
+!
+! --- SNMP Configuration ---
+snmp-server community TechademyRO RO
+snmp-server community TechademyRW RW
+snmp-server location {{ device.location.name }}
+snmp-server contact noc@techademy.lab
+snmp-server enable traps
+!
+! --- Logging ---
+logging buffered 32768
+logging host 10.100.0.20
+logging trap informational
+logging source-interface Loopback0
+!
+! --- Banner ---
+banner motd ^
+*************************************************************
+* AUTHORIZED ACCESS ONLY                                    *
+* This device is property of Techademy Training Lab         *
+* Unauthorized access is prohibited                         *
+* Device: {{ device.name }} | Location: {{ device.location.name }}
+*************************************************************
+^
+!
+! --- SSH Configuration ---
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 3
+line vty 0 15
+ transport input ssh
+ login local
+ exec-timeout 15 0
+!
+line con 0
+ exec-timeout 15 0
+ logging synchronous
+!
+end

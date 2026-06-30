@@ -1,0 +1,45 @@
+!
+! =============================================
+! Intended Configuration for {{ device.name }}
+! Location: {{ device.location.name }}
+! Role: {{ device.role.name }}
+! Platform: {{ device.platform.name }}
+! =============================================
+!
+hostname {{ device.name }}
+domain-name techademy.lab
+!
+! --- NTP ---
+ntp server 10.100.0.1 prefer
+ntp server 10.100.0.2
+clock timezone UTC 0
+!
+! --- DNS ---
+dns domain-lookup management
+dns server-group DefaultDNS
+ name-server 10.100.0.10
+ name-server 10.100.0.11
+!
+! --- SNMP ---
+snmp-server community TechademyRO
+snmp-server location {{ device.location.name }}
+snmp-server contact noc@techademy.lab
+snmp-server enable traps
+!
+! --- Logging ---
+logging enable
+logging host management 10.100.0.20
+logging trap informational
+logging buffer-size 32768
+!
+! --- Banner ---
+banner motd *************************************************************
+banner motd * AUTHORIZED ACCESS ONLY
+banner motd * Device: {{ device.name }} | Location: {{ device.location.name }}
+banner motd *************************************************************
+!
+! --- SSH ---
+ssh version 2
+ssh timeout 15
+!
+end

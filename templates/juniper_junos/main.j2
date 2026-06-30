@@ -1,0 +1,59 @@
+## =============================================
+## Intended Configuration for {{ device.name }}
+## Location: {{ device.location.name }}
+## Role: {{ device.role.name }}
+## Platform: {{ device.platform.name }}
+## =============================================
+
+system {
+    host-name {{ device.name }};
+    domain-name techademy.lab;
+    time-zone UTC;
+    ## --- AAA ---
+    authentication-order [ password ];
+    ## --- NTP ---
+    ntp {
+        server 10.100.0.1 prefer;
+        server 10.100.0.2;
+    }
+    ## --- DNS ---
+    name-server {
+        10.100.0.10;
+        10.100.0.11;
+    }
+    ## --- Logging ---
+    syslog {
+        host 10.100.0.20 {
+            any info;
+        }
+        file messages {
+            any notice;
+            authorization info;
+        }
+    }
+    ## --- Banner ---
+    login {
+        message "*************************************************************\n* AUTHORIZED ACCESS ONLY                                    *\n* Device: {{ device.name }} | Location: {{ device.location.name }}\n*************************************************************";
+    }
+    ## --- SSH ---
+    services {
+        ssh {
+            protocol-version v2;
+            connection-limit 10;
+        }
+        netconf {
+            ssh;
+        }
+    }
+}
+## --- SNMP ---
+snmp {
+    community TechademyRO {
+        authorization read-only;
+    }
+    community TechademyRW {
+        authorization read-write;
+    }
+    location "{{ device.location.name }}";
+    contact "noc@techademy.lab";
+}
