@@ -68,14 +68,14 @@ class Job2InterfaceCompliance(Job):
 
     def run(self):
         self.logger.info("Starting interface compliance scan...")
-        interfaces = Interface.objects.all().select_related("device")
-        total = interfaces.count()
+        interfaces = Interface.objects.all().select_related("device")[:200]
+        total = Interface.objects.count()
         blank = 0
         short = 0
         compliant = 0
 
         for iface in interfaces:
-            time.sleep(0.1)
+            time.sleep(0.05)
             desc = iface.description or ""
             if not desc:
                 blank += 1
@@ -254,7 +254,7 @@ class Job7VLANConsistency(Job):
 
     def run(self):
         self.logger.info("Starting VLAN consistency check...")
-        vlans = VLAN.objects.all().select_related("vlan_group", "location")
+        vlans = VLAN.objects.all().select_related("vlan_group")
         total = vlans.count()
         duplicates = 0
         no_name = 0
@@ -265,12 +265,12 @@ class Job7VLANConsistency(Job):
             if not vlan.name:
                 no_name += 1
 
-            loc_name = vlan.location.name if vlan.location else "global"
-            key = f"{loc_name}-{vlan.vid}"
+            group_name = vlan.vlan_group.name if vlan.vlan_group else "global"
+            key = f"{group_name}-{vlan.vid}"
             if key in seen:
                 duplicates += 1
                 self.logger.warning(
-                    f"  Duplicate VLAN {vlan.vid} at {loc_name}: "
+                    f"  Duplicate VLAN {vlan.vid} in {group_name}: "
                     f"'{vlan.name}' vs '{seen[key]}'"
                 )
             else:
