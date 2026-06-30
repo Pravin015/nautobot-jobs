@@ -1,0 +1,80 @@
+!
+! =============================================
+! Intended Configuration for {{ device.name }}
+! Location: {{ device.location.name }}
+! Role: {{ device.role.name }}
+! Platform: {{ device.platform.name }}
+! =============================================
+!
+! --- F5 BIG-IP Load Balancer ---
+!
+sys global-settings {
+    hostname {{ device.name }}.techademy.lab
+    gui-setup disabled
+}
+!
+! --- NTP Configuration ---
+sys ntp {
+    servers {
+        10.100.0.1 { }
+        10.100.0.2 { }
+    }
+    timezone UTC
+}
+!
+! --- DNS Configuration ---
+sys dns {
+    name-servers {
+        10.100.0.10
+        10.100.0.11
+    }
+    search {
+        techademy.lab
+    }
+}
+!
+! --- SNMP Configuration ---
+sys snmp {
+    allowed-addresses {
+        10.0.0.0/8 { }
+    }
+    communities {
+        TechademyRO {
+            community-name TechademyRO
+            access ro
+        }
+    }
+    sys-location {{ device.location.name }}
+    sys-contact noc@techademy.lab
+}
+!
+! --- Syslog ---
+sys syslog {
+    remote-servers {
+        10.100.0.20 {
+            remote-port 514
+        }
+    }
+}
+!
+! --- SSH Configuration ---
+sys sshd {
+    allow {
+        10.0.0.0/8
+    }
+    inactivity-timeout 900
+    login-grace-time 60
+}
+!
+! --- Banner ---
+sys sshd {
+    banner enabled
+    banner-text "
+*************************************************************
+* AUTHORIZED ACCESS ONLY                                    *
+* Device: {{ device.name }} | Location: {{ device.location.name }}
+*************************************************************
+"
+}
+!
+end
