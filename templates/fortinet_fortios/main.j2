@@ -1,12 +1,12 @@
 # =============================================
-# Intended Configuration for {{ device.name }}
-# Location: {{ device.location.name }}
-# Role: {{ device.role.name }}
-# Platform: {{ device.platform.name }}
+# Intended Configuration for {{ obj.name }}
+# Location: {{ obj.location.name }}
+# Role: {{ obj.role.name }}
+# Platform: {{ obj.platform.name }}
 # =============================================
 #
 config system global
-    set hostname "{{ device.name }}"
+    set hostname "{{ obj.name }}"
     set timezone 00
 end
 #
@@ -44,7 +44,7 @@ config system snmp community
     next
 end
 config system snmp sysinfo
-    set location "{{ device.location.name }}"
+    set location "{{ obj.location.name }}"
     set contact-info "noc@techademy.lab"
 end
 #
@@ -58,6 +58,6 @@ end
 #
 # --- Banner ---
 config system replacemsg admin "pre_admin-disclaimer-text"
-    set buffer "AUTHORIZED ACCESS ONLY - {{ device.name }} at {{ device.location.name }}"
+    set buffer "AUTHORIZED ACCESS ONLY - {{ obj.name }} at {{ obj.location.name }}"
 end
 #

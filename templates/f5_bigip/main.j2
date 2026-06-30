@@ -1,15 +1,15 @@
 !
 ! =============================================
-! Intended Configuration for {{ device.name }}
-! Location: {{ device.location.name }}
-! Role: {{ device.role.name }}
-! Platform: {{ device.platform.name }}
+! Intended Configuration for {{ obj.name }}
+! Location: {{ obj.location.name }}
+! Role: {{ obj.role.name }}
+! Platform: {{ obj.platform.name }}
 ! =============================================
 !
 ! --- F5 BIG-IP Load Balancer ---
 !
 sys global-settings {
-    hostname {{ device.name }}.techademy.lab
+    hostname {{ obj.name }}.techademy.lab
     gui-setup disabled
 }
 !
@@ -44,7 +44,7 @@ sys snmp {
             access ro
         }
     }
-    sys-location {{ device.location.name }}
+    sys-location {{ obj.location.name }}
     sys-contact noc@techademy.lab
 }
 !
@@ -72,7 +72,7 @@ sys sshd {
     banner-text "
 *************************************************************
 * AUTHORIZED ACCESS ONLY                                    *
-* Device: {{ device.name }} | Location: {{ device.location.name }}
+* Device: {{ obj.name }} | Location: {{ obj.location.name }}
 *************************************************************
 "
 }

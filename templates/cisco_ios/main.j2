@@ -1,12 +1,12 @@
 !
 ! =============================================
-! Intended Configuration for {{ device.name }}
-! Location: {{ device.location.name }}
-! Role: {{ device.role.name }}
-! Platform: {{ device.platform.name }}
+! Intended Configuration for {{ obj.name }}
+! Location: {{ obj.location.name }}
+! Role: {{ obj.role.name }}
+! Platform: {{ obj.platform.name }}
 ! =============================================
 !
-hostname {{ device.name }}
+hostname {{ obj.name }}
 !
 ! --- AAA Configuration ---
 aaa new-model
@@ -32,7 +32,7 @@ ip name-server 10.100.0.11
 ! --- SNMP Configuration ---
 snmp-server community TechademyRO RO
 snmp-server community TechademyRW RW
-snmp-server location {{ device.location.name }}
+snmp-server location {{ obj.location.name }}
 snmp-server contact noc@techademy.lab
 snmp-server enable traps
 !
@@ -48,7 +48,7 @@ banner motd ^
 * AUTHORIZED ACCESS ONLY                                    *
 * This device is property of Techademy Training Lab         *
 * Unauthorized access is prohibited                         *
-* Device: {{ device.name }} | Location: {{ device.location.name }}
+* Device: {{ obj.name }} | Location: {{ obj.location.name }}
 *************************************************************
 ^
 !

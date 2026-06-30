@@ -1,12 +1,12 @@
 !
 ! =============================================
-! Intended Configuration for {{ device.name }}
-! Location: {{ device.location.name }}
-! Role: {{ device.role.name }}
-! Platform: {{ device.platform.name }}
+! Intended Configuration for {{ obj.name }}
+! Location: {{ obj.location.name }}
+! Role: {{ obj.role.name }}
+! Platform: {{ obj.platform.name }}
 ! =============================================
 !
-hostname {{ device.name }}
+hostname {{ obj.name }}
 !
 ! --- Feature Set ---
 feature ssh
@@ -30,7 +30,7 @@ ip name-server 10.100.0.11
 ! --- SNMP Configuration ---
 snmp-server community TechademyRO group network-operator
 snmp-server community TechademyRW group network-admin
-snmp-server location {{ device.location.name }}
+snmp-server location {{ obj.location.name }}
 snmp-server contact noc@techademy.lab
 !
 ! --- Logging ---
@@ -42,7 +42,7 @@ logging source-interface loopback0
 banner motd #
 *************************************************************
 * AUTHORIZED ACCESS ONLY                                    *
-* Device: {{ device.name }} | Location: {{ device.location.name }}
+* Device: {{ obj.name }} | Location: {{ obj.location.name }}
 *************************************************************
 #
 !

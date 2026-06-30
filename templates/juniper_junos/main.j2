@@ -1,12 +1,12 @@
 ## =============================================
-## Intended Configuration for {{ device.name }}
-## Location: {{ device.location.name }}
-## Role: {{ device.role.name }}
-## Platform: {{ device.platform.name }}
+## Intended Configuration for {{ obj.name }}
+## Location: {{ obj.location.name }}
+## Role: {{ obj.role.name }}
+## Platform: {{ obj.platform.name }}
 ## =============================================
 
 system {
-    host-name {{ device.name }};
+    host-name {{ obj.name }};
     domain-name techademy.lab;
     time-zone UTC;
     ## --- AAA ---
@@ -33,7 +33,7 @@ system {
     }
     ## --- Banner ---
     login {
-        message "*************************************************************\n* AUTHORIZED ACCESS ONLY                                    *\n* Device: {{ device.name }} | Location: {{ device.location.name }}\n*************************************************************";
+        message "*************************************************************\n* AUTHORIZED ACCESS ONLY                                    *\n* Device: {{ obj.name }} | Location: {{ obj.location.name }}\n*************************************************************";
     }
     ## --- SSH ---
     services {
@@ -54,6 +54,6 @@ snmp {
     community TechademyRW {
         authorization read-write;
     }
-    location "{{ device.location.name }}";
+    location "{{ obj.location.name }}";
     contact "noc@techademy.lab";
 }

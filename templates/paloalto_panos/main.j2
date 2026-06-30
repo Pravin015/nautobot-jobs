@@ -1,11 +1,11 @@
 ! =============================================
-! Intended Configuration for {{ device.name }}
-! Location: {{ device.location.name }}
-! Role: {{ device.role.name }}
-! Platform: {{ device.platform.name }}
+! Intended Configuration for {{ obj.name }}
+! Location: {{ obj.location.name }}
+! Role: {{ obj.role.name }}
+! Platform: {{ obj.platform.name }}
 ! =============================================
 !
-set deviceconfig system hostname {{ device.name }}
+set deviceconfig system hostname {{ obj.name }}
 set deviceconfig system domain techademy.lab
 set deviceconfig system timezone UTC
 !
@@ -21,10 +21,10 @@ set deviceconfig system ntp-servers secondary-ntp-server ntp-server-address 10.1
 set deviceconfig system syslog server 10.100.0.20 transport UDP port 514 facility LOG_USER
 !
 ! --- SNMP ---
-set deviceconfig system snmp-setting snmp-system location "{{ device.location.name }}"
+set deviceconfig system snmp-setting snmp-system location "{{ obj.location.name }}"
 set deviceconfig system snmp-setting snmp-system contact "noc@techademy.lab"
 set deviceconfig system snmp-setting access-setting version v2c snmp-community-string TechademyRO
 !
 ! --- Banner ---
-set deviceconfig system login-banner "AUTHORIZED ACCESS ONLY - {{ device.name }} at {{ device.location.name }}"
+set deviceconfig system login-banner "AUTHORIZED ACCESS ONLY - {{ obj.name }} at {{ obj.location.name }}"
 !

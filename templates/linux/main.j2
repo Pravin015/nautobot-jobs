@@ -1,12 +1,12 @@
 # =============================================
-# Intended Configuration for {{ device.name }}
-# Location: {{ device.location.name }}
-# Role: {{ device.role.name }}
-# Platform: {{ device.platform.name }}
+# Intended Configuration for {{ obj.name }}
+# Location: {{ obj.location.name }}
+# Role: {{ obj.role.name }}
+# Platform: {{ obj.platform.name }}
 # =============================================
 
 # --- Hostname ---
-hostname={{ device.name }}
+hostname={{ obj.name }}
 
 # --- DNS Configuration ---
 # /etc/resolv.conf
@@ -22,7 +22,7 @@ server 10.100.0.2 iburst
 # --- SNMP Configuration ---
 # /etc/snmp/snmpd.conf
 rocommunity TechademyRO
-syslocation {{ device.location.name }}
+syslocation {{ obj.location.name }}
 syscontact noc@techademy.lab
 
 # --- Logging Configuration ---
@@ -42,6 +42,6 @@ LoginGraceTime 60
 # /etc/issue.net
 #####################################################
 # AUTHORIZED ACCESS ONLY                           #
-# Device: {{ device.name }}                         #
-# Location: {{ device.location.name }}              #
+# Device: {{ obj.name }}                         #
+# Location: {{ obj.location.name }}              #
 #####################################################

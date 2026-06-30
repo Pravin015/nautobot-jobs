@@ -1,12 +1,12 @@
 !
 ! =============================================
-! Intended Configuration for {{ device.name }}
-! Location: {{ device.location.name }}
-! Role: {{ device.role.name }}
-! Platform: {{ device.platform.name }}
+! Intended Configuration for {{ obj.name }}
+! Location: {{ obj.location.name }}
+! Role: {{ obj.role.name }}
+! Platform: {{ obj.platform.name }}
 ! =============================================
 !
-hostname {{ device.name }}
+hostname {{ obj.name }}
 domain-name techademy.lab
 !
 ! --- NTP ---
@@ -22,7 +22,7 @@ dns server-group DefaultDNS
 !
 ! --- SNMP ---
 snmp-server community TechademyRO
-snmp-server location {{ device.location.name }}
+snmp-server location {{ obj.location.name }}
 snmp-server contact noc@techademy.lab
 snmp-server enable traps
 !
@@ -35,7 +35,7 @@ logging buffer-size 32768
 ! --- Banner ---
 banner motd *************************************************************
 banner motd * AUTHORIZED ACCESS ONLY
-banner motd * Device: {{ device.name }} | Location: {{ device.location.name }}
+banner motd * Device: {{ obj.name }} | Location: {{ obj.location.name }}
 banner motd *************************************************************
 !
 ! --- SSH ---

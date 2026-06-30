@@ -1,16 +1,16 @@
 !
 ! =============================================
-! Intended Configuration for {{ device.name }}
-! Location: {{ device.location.name }}
-! Role: {{ device.role.name }}
-! Platform: {{ device.platform.name }}
+! Intended Configuration for {{ obj.name }}
+! Location: {{ obj.location.name }}
+! Role: {{ obj.role.name }}
+! Platform: {{ obj.platform.name }}
 ! =============================================
 !
 ! --- Meraki Cloud-Managed Device ---
 ! Configuration is managed via Meraki Dashboard
 !
-! Device: {{ device.name }}
-! Location: {{ device.location.name }}
+! Device: {{ obj.name }}
+! Location: {{ obj.location.name }}
 !
 ! --- Network Settings ---
 ! Management VLAN: default
@@ -23,7 +23,7 @@
 !
 ! --- SNMP ---
 ! SNMP v3 community: TechademyRO
-! SNMP location: {{ device.location.name }}
+! SNMP location: {{ obj.location.name }}
 ! SNMP contact: noc@techademy.lab
 !
 ! --- Syslog ---
@@ -38,7 +38,7 @@
 ! --- Banner ---
 ! *************************************************************
 ! * AUTHORIZED ACCESS ONLY                                    *
-! * Device: {{ device.name }} | Location: {{ device.location.name }}
+! * Device: {{ obj.name }} | Location: {{ obj.location.name }}
 ! *************************************************************
 !
 end
